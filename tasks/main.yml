@@ -1,0 +1,16 @@
+---
+- name: Install deps to avoid pip doing compilation or enable it
+  apt: name={{item}} state=present
+  with_items: dependencies
+
+- name: pip install monasca-agent
+  pip: name=monasca-agent state=latest
+  notify: run monasca-setup
+
+- name: create conf.d dir
+  file: path="{{monasca_conf_dir}}/conf.d" state=directory owner=root group=root mode=755
+
+- name: Create additional plugins config
+  copy: dest="{{monasca_conf_dir}}/conf.d/{{item.key}}.yaml" content={{item.value}} owner=root group=root mode=644
+  with_dict: monasca_checks
+  notify: run monasca-setup

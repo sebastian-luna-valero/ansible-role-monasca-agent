@@ -1,0 +1,2 @@
+- name: run monasca-setup
+  command: /usr/local/bin/monasca-setup -u {{monasca-agent.user}} -p {{monasca-agent.password}} -s {{monasca-agent.service}} --keystone_url {{keystone_url}} --project_name {{monasca-agent.project}} --monasca_url {{monasca-api_url}}
