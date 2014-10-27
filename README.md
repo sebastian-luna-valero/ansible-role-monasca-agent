@@ -23,7 +23,7 @@ An example ssh check:
           ssh_timeout: 0.5
           ping_timeout: 1
         instances:
-          devstack:
+          - devstack:
             name: devstack
             host_name: 192.168.10.5
             alive_test: ssh
