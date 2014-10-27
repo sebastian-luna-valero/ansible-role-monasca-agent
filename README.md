@@ -3,12 +3,12 @@ Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part o
 
 ##Requirements
 - keystone_url:
-- monasca-agent:
+- monasca_agent:
   user:
   password:
   project:
   service:
-- monasca-api_url:
+- monasca_api_url:
 
 Optionally supply monasca_checks varible which is a dictionary with each entry consisting of a plugin name followed by the
 plugin config, typically with two sections init_config and instances. Refer to the specific monasca-agent plugin documentation
