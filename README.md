@@ -24,9 +24,9 @@ An example ssh check:
           ping_timeout: 1
         instances:
           - devstack:
-            name: devstack
-            host_name: 192.168.10.5
-            alive_test: ssh
+              name: devstack
+              host_name: 192.168.10.5
+              alive_test: ssh
 
 ##License
 Apache
