@@ -8,9 +8,9 @@
   notify: run monasca-setup
 
 - name: create conf.d dir
-  file: path="{{monasca_conf_dir}}/conf.d" state=directory owner=root group=root mode=755
+  file: path="{{monasca_conf_dir}}/agent/conf.d" state=directory owner=root group=root mode=755
 
 - name: Create additional plugins config
-  template: dest="{{monasca_conf_dir}}/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
+  template: dest="{{monasca_conf_dir}}/agent/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
   with_dict: monasca_checks
   notify: run monasca-setup
