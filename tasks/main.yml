@@ -14,3 +14,8 @@
   template: dest="{{monasca_conf_dir}}/agent/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
   with_dict: monasca_checks
   notify: run monasca-setup
+
+- meta: flush_handlers
+
+- name: Enable Monasca-Agent
+  service: name=monasca-agent state=started enabled=yes
