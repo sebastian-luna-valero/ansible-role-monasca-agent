@@ -17,7 +17,7 @@
 
 # Instead of running this directly by creating a file to run it changes such as user/pass will trigger a rerun. Also a user can run it manually
 - name: Create /usr/local/bin/monasca-reconfigure
-  template: dest="{{agent_reconfigure_script}}" src=monasca-reconfigure.j2 owner=root group=root mode=755
+  template: dest="{{agent_reconfigure_script}}" src=monasca-reconfigure.j2 owner=root group=root mode=750
   notify: run monasca-setup
 
 - meta: flush_handlers
