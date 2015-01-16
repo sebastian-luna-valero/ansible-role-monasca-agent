@@ -1,2 +1,3 @@
 ---
 monasca_checks: {}
+agent_reconfigure_script: /usr/local/bin/monasca-reconfigure
