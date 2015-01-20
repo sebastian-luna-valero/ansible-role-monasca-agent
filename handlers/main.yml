@@ -1,2 +1,2 @@
 - name: run monasca-setup
-  command: /usr/local/bin/monasca-setup -u {{monasca_agent.user}} -p {{monasca_agent.password}} -s {{monasca_agent.service}} --keystone_url {{keystone_url}} --project_name {{monasca_agent.project}} --monasca_url {{monasca_api_url}} --overwrite
+  command: "{{agent_reconfigure_script}}"
