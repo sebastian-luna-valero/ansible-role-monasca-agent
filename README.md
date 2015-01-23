@@ -7,7 +7,7 @@ Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part o
   user:
   password:
   project:
-  service:
+  service:  # Defining the service is optional
 - monasca_api_url:
 
 Optionally supply monasca_checks varible which is a dictionary with each entry consisting of a plugin name followed by the
