@@ -2,10 +2,12 @@
 - name: Install deps to avoid pip doing compilation or enable it
   apt: name={{item}} state=present
   with_items: dependencies
+  when: not skip_install
 
 - name: pip install monasca-agent
   pip: name=monasca-agent state=latest
   notify: run monasca-setup
+  when: not skip_install
 
 - name: create conf.d dir
   file: path="{{monasca_conf_dir}}/agent/conf.d" state=directory owner=root group=root mode=755
