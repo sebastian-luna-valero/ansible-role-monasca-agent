@@ -1,5 +1,6 @@
 ---
 monasca_checks: {}
 agent_reconfigure_script: /usr/local/bin/monasca-reconfigure
+monasca_agent_check_frequency: 60
 
 skip_install: False
