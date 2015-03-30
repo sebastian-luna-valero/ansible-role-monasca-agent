@@ -8,6 +8,7 @@ Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part o
   password:
   project:
   service:  # Defining the service is optional
+  dimensions: 'role:monitoring,region:a' # Defining dimensions is optional
 
 If `monasca_api_url` is undefined it will be pulled from the keystone service catalog.
 
