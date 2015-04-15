@@ -1,11 +1,7 @@
 ---
 dependencies:
-  - python-pymongo
   - python-yaml
-  - supervisor
-  - sysstat
   - build-essential
   - libxml2-dev
   - libxslt1-dev
-  - nagios-plugins-basic
 monasca_conf_dir: /etc/monasca
