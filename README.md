@@ -1,16 +1,17 @@
 #monasca-agent
 Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part of the [Monasca](https://wiki.openstack.org/wiki/Monasca) project.
+It is installs it into a virtualenv on the box.
 
-##Requirements
+## Requirements
 - keystone_url:
-- monasca_agent:
-  user:
-  password:
-  project:
-  service:  # Defining the service is optional
-  dimensions: 'role:monitoring,region:a' # Defining dimensions is optional
+- monasca_agent_user:
+- monasca_agent_password:
+- monasca_agent_project:
 
-If `monasca_api_url` is undefined it will be pulled from the keystone service catalog.
+## Optional
+- monasca_agent_service:
+- monasca_agent_dimensions: 'role:monitoring,region:a'
+- monasca_api_url: if undefined it will be pulled from the keystone service catalog.
 
 Optionally supply monasca_checks varible which is a dictionary with each entry consisting of a plugin name followed by the
 plugin config, typically with two sections init_config and instances. Refer to the specific monasca-agent plugin documentation

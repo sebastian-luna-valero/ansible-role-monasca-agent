@@ -4,8 +4,12 @@
   with_items: dependencies
   when: not skip_install
 
-- name: pip install monasca-agent
-  pip: name=monasca-agent state=latest
+- name: pip install virtualenv
+  pip: name=virtualenv state=present
+  when: not skip_install
+
+- name: pip install monasca-agent in a virtualenv
+  pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}"
   notify: run monasca-setup
   when: not skip_install
 
@@ -18,7 +22,7 @@
   notify: run monasca-setup
 
 # Instead of running this directly by creating a file to run it changes such as user/pass will trigger a rerun. Also a user can run it manually
-- name: Create /usr/local/bin/monasca-reconfigure
+- name: Create reconfigure script
   template: dest="{{agent_reconfigure_script}}" src=monasca-reconfigure.j2 owner=root group=root mode=750
   notify: run monasca-setup
 
