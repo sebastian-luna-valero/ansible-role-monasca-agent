@@ -5,12 +5,12 @@ It is installs it into a virtualenv on the box.
 ## Requirements
 - keystone_url:
 - monasca_agent_user:
-- monasc_agent_password:
-- monasc_agent_project:
+- monasca_agent_password:
+- monasca_agent_project:
 
 ## Optional
-- monasc_agent_service:
-- monasc_agent_dimensions: 'role:monitoring,region:a'
+- monasca_agent_service:
+- monasca_agent_dimensions: 'role:monitoring,region:a'
 - monasca_api_url: if undefined it will be pulled from the keystone service catalog.
 
 Optionally supply monasca_checks varible which is a dictionary with each entry consisting of a plugin name followed by the
