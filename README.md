@@ -1,5 +1,6 @@
 #monasca-agent
 Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part of the [Monasca](https://wiki.openstack.org/wiki/Monasca) project.
+It is installs it into a virtualenv on the box.
 
 ## Requirements
 - keystone_url:
