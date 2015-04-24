@@ -11,7 +11,12 @@
 - name: pip install monasca-agent in a virtualenv
   pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}"
   notify: run monasca-setup
-  when: not skip_install
+  when: not skip_install and monasca_agent_version is not defined
+
+- name: pip install monasca-agent in a virtualenv
+  pip: name=monasca-agent state=present version="{{monasca_agent_version}}" virtualenv="{{monasca_virtualenv_dir}}"
+  notify: run monasca-setup
+  when: not skip_install and monasca_agent_version is defined
 
 - name: create conf.d dir
   file: path="{{monasca_conf_dir}}/agent/conf.d" state=directory owner=root group=root mode=755
