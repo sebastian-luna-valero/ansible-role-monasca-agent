@@ -5,3 +5,4 @@ monasca_agent_check_frequency: 60
 
 skip_install: False
 monasca_virtualenv_dir: /opt/monasca
+pip_conf_dir: ~/.pip
