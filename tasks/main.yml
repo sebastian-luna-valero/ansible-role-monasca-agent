@@ -1,4 +1,7 @@
 ---
+- include: pip_index.yml
+  when: not skip_install
+
 - name: Install deps to avoid pip doing compilation or enable it
   apt: name={{item}} state=present
   with_items: dependencies

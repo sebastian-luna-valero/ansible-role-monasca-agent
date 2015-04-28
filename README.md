@@ -13,6 +13,7 @@ It is installs it into a virtualenv on the box.
 - monasca_agent_dimensions: 'role:monitoring,region:a'
 - monasca_api_url: if undefined it will be pulled from the keystone service catalog.
 - monasca_agent_version: Defines a specific version to install, defaults to latest
+- pip_index_url: Index URL to use instead of the default for installing pip packages
 
 Optionally supply monasca_checks varible which is a dictionary with each entry consisting of a plugin name followed by the
 plugin config, typically with two sections init_config and instances. Refer to the specific monasca-agent plugin documentation
