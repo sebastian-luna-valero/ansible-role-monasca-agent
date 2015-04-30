@@ -1,5 +1,6 @@
 ---
 dependencies:
+  - python-dev
   - python-yaml
   - build-essential
   - libxml2-dev
