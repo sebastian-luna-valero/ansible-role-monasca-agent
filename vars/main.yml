@@ -1,6 +1,5 @@
 ---
 dependencies:
-  - python-pip
   - python-dev
   - python-yaml
   - build-essential

@@ -1,4 +1,7 @@
 ---
+- include_vars: "{{ ansible_distribution }}.yml"
+  when: not skip_install
+
 - include: pip_index.yml
   when: not skip_install
 
@@ -7,8 +10,9 @@
   with_items: dependencies
   when: not skip_install
 
-- name: pip install virtualenv
-  pip: name=virtualenv state=present
+- name: pip install monasca-agent in a virtualenv
+  pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}"
+  notify: run monasca-setup
   when: not skip_install
 
 - name: pip install latest monasca-agent in a virtualenv
