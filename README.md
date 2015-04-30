@@ -9,6 +9,7 @@ It is installs it into a virtualenv on the box.
 - monasca_agent_project:
 
 ## Optional
+- monasca_agent_system_only - setting to true will cause Monasca setup to run in system_only mode
 - monasca_agent_service:
 - monasca_agent_dimensions: 'role:monitoring,region:a'
 - monasca_api_url: if undefined it will be pulled from the keystone service catalog.
