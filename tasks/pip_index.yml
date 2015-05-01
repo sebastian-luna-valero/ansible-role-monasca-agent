@@ -1,6 +1,6 @@
 ---
 - name: Create pip conf dir if pip index URL specified
-  file: path={{ pip_conf_dir }} state=directory owner=root group={{monasca_group}} mode=770
+  file: path={{ pip_conf_dir }} state=directory owner=root group=root mode=770
   when: pip_index_url is defined
 
 - name: Use pip index URL if specified
