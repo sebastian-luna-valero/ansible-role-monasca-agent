@@ -69,7 +69,15 @@ def main():
     args.extend(names)
     
     rc, out, err = module.run_command(args, check_rc=True)
-    module.exit_json(changed=True, cmd=args, stdout=out.rstrip("\r\n"), stderr=err.rstrip("\r\n"), rc=rc)
+    if err.find('Not all plugins found') != -1:
+        module.fail_json(msg='Some specified plugins were not found.', stdout=out.rstrip("\r\n"), stderr=err.rstrip("\r\n"))
+
+    if err.find('No changes found') == -1:
+        changed == True
+    else:
+        changed = False
+
+    module.exit_json(changed=changed, cmd=args, stdout=out.rstrip("\r\n"), stderr=err.rstrip("\r\n"), rc=rc)
 
 if __name__ == "__main__":
     main()
