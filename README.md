@@ -47,6 +47,17 @@ in system only mode then as different services are installed they can selectivel
             - ntp
             - mysql
 
+To copy custom detection and/or check plugins to the machine before running the monasca_agent_plugin module, use the
+[copy module](http://docs.ansible.com/copy_module.html) with the published variables `monasca_agent_check_plugin_dir` or `monasca_agent_detection_plugin_dir`
+for example:
+
+    - name: Copy example check plugin
+      copy: src=files/check/example.py dest="{{monasca_agent_check_plugin_dir}}"
+    - name: Copy example detection plugin
+      copy: src=files/detection/example.py dest="{{monasca_agent_detection_plugin_dir}}"
+    - name: Run Monasca agent example plugin configuration
+      monasca_agent_plugin: name="example"
+
 ##License
 Apache
 
