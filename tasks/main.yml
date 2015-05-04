@@ -1,11 +1,4 @@
 ---
-- include_vars: "{{ ansible_distribution }}.yml"
-  when: not skip_install
-
-- name: Install virtualenv
-  apt: name="{{ virtualenv_pkg }}" state=present
-  when: not skip_install
-
 - include: pip_index.yml
   when: not skip_install
 

@@ -3,6 +3,8 @@ Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part o
 It is installs it into a virtualenv on the box.
 
 ## Requirements
+virtualenv must be installed on the system.
+
 - keystone_url:
 - monasca_agent_user:
 - monasca_agent_password:
