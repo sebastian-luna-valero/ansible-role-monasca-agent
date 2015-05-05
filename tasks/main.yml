@@ -17,8 +17,12 @@
   notify: run monasca-setup
   when: not skip_install and monasca_agent_version is defined
 
-- name: create conf.d dir
-  file: path="{{monasca_conf_dir}}/agent/conf.d" state=directory owner=root group=root mode=755
+- name: create conf.d dir and custom plugin dirs
+  file: path="{{item}}" state=directory owner=root group=root mode=755
+  with_items:
+    - "{{monasca_conf_dir}}/agent/conf.d"
+    - "{{monasca_agent_check_plugin_dir}}"
+    - "{{monasca_agent_detection_plugin_dir}}"
 
 - name: Create additional plugins config
   template: dest="{{monasca_conf_dir}}/agent/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
