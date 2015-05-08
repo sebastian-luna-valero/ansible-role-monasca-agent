@@ -73,7 +73,7 @@ def main():
         module.fail_json(msg='Some specified plugins were not found.', stdout=out.rstrip("\r\n"), stderr=err.rstrip("\r\n"))
 
     if err.find('No changes found') == -1:
-        changed == True
+        changed = True
     else:
         changed = False
 
