@@ -11,6 +11,10 @@ description:
 author: Tim Kuhlman <tim@backgroundprocess.com>
 requirements: [ ]
 options:
+    args:
+        required: false
+        description:
+            - A string containing arguments passed to the detection plugin
     name:
         required: false
         description:
@@ -49,6 +53,7 @@ from ansible.module_utils.basic import *
 def main():
     module = AnsibleModule(
         argument_spec=dict(
+            args=dict(required=False, type='str'),
             name=dict(required=False, type='str'),
             names=dict(required=False, type='list'),
             state=dict(default='configured', choices=['configured'], type='str'),
@@ -67,6 +72,8 @@ def main():
     
     args = [module.params['monasca_setup_path'], '-d']
     args.extend(names)
+    if module.params['args'] is not None:
+        args.extend(['-a', module.params['args']])
     
     rc, out, err = module.run_command(args, check_rc=True)
     if err.find('Not all plugins found') != -1:
