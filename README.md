@@ -17,6 +17,7 @@ virtualenv must be installed on the system.
 - monasca_api_url: if undefined it will be pulled from the keystone service catalog.
 - monasca_agent_version: Defines a specific version to install, defaults to latest
 - pip_index_url: Index URL to use instead of the default for installing pip packages
+- run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start. 'Use' can be set if the only desire is to use the monasca_agent_plugin module
 
 Optionally supply monasca_checks varible which is a dictionary with each entry consisting of a plugin name followed by the
 plugin config, typically with two sections init_config and instances. Refer to the specific monasca-agent plugin documentation
@@ -48,6 +49,11 @@ in system only mode then as different services are installed they can selectivel
         names:
             - ntp
             - mysql
+
+You must have the monasca-agent role in your playbook. If the agent is already deployed and you just need to use monasca_agent_plugin, then you can add the role in and have it skip all install, configure and start steps by using these lines in your playbook:
+
+  roles:
+    - {role: monasca-agent, run_mode: Use}
 
 To copy custom detection and/or check plugins to the machine before running the monasca_agent_plugin module, use the
 [copy module](http://docs.ansible.com/copy_module.html) with the published variables `monasca_agent_check_plugin_dir` or `monasca_agent_detection_plugin_dir`

@@ -1,0 +1,22 @@
+---
+- name: create conf.d dir and custom plugin dirs
+  file: path="{{item}}" state=directory owner=root group=root mode=755
+  with_items:
+    - "{{monasca_conf_dir}}/agent/conf.d"
+    - "{{monasca_agent_check_plugin_dir}}"
+    - "{{monasca_agent_detection_plugin_dir}}"
+
+- name: Create additional plugins config
+  template: dest="{{monasca_conf_dir}}/agent/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
+  with_dict: monasca_checks
+  notify: run monasca-setup
+
+# Instead of running this directly by creating a file to run it changes such as user/pass will trigger a rerun. Also a user can run it manually
+- name: Create reconfigure script
+  template: dest="{{agent_reconfigure_script}}" src=monasca-reconfigure.j2 owner=root group=root mode=750
+  notify: run monasca-setup
+
+- meta: flush_handlers
+
+- name: Enable Monasca-Agent
+  service: name=monasca-agent state=started enabled=yes
