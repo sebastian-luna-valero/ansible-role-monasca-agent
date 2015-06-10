@@ -1,0 +1,3 @@
+---
+- name: Start and Enable Monasca-Agent
+  service: name=monasca-agent state=started enabled=yes

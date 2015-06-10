@@ -1,0 +1,3 @@
+---
+- name: Stop Monasca-Agent
+  service: name=monasca-agent state=stopped
