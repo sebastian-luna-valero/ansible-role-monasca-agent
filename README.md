@@ -42,9 +42,9 @@ This role contains the module monasca_agent_plugin which can be used to run mona
 useful when used with the monasca_agent_system_only option of the role. In a deployment of many machines every machine can have the role applied
 in system only mode then as different services are installed they can selectively enable different agent plugins using this module. Example usage:
 
-    - name: Monasca agent ntp plugin configuration                                                                                                             
+    - name: Monasca agent ntp plugin configuration
       monasca_agent_plugin: name="ntp"
-    - name: Monasca agent plugin configuration                                                                                                             
+    - name: Monasca agent plugin configuration
       monasca_agent_plugin:
         names:
             - ntp
