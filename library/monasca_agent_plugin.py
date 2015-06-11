@@ -37,10 +37,10 @@ options:
 '''
 
 EXAMPLES = '''
-tasks:                                                                                                                                                       
-    - name: Monasca agent ntp plugin configuration                                                                                                             
+tasks:
+    - name: Monasca agent ntp plugin configuration
       monasca_agent_plugin: name="ntp"
-    - name: Monasca agent plugin configuration                                                                                                             
+    - name: Monasca agent plugin configuration
       monasca_agent_plugin:
         names:
             - ntp
@@ -69,12 +69,12 @@ def main():
         names = module.params['names']
     else:
         names = [module.params['name']]
-    
+
     args = [module.params['monasca_setup_path'], '-d']
     args.extend(names)
     if module.params['args'] is not None:
         args.extend(['-a', module.params['args']])
-    
+
     rc, out, err = module.run_command(args, check_rc=True)
     if err.find('Not all plugins found') != -1:
         module.fail_json(msg='Some specified plugins were not found.', stdout=out.rstrip("\r\n"), stderr=err.rstrip("\r\n"))
