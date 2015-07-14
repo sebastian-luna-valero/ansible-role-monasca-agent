@@ -59,7 +59,7 @@ def main():
             state=dict(default='configured', choices=['configured'], type='str'),
             monasca_setup_path=dict(default='/opt/monasca/bin/monasca-setup', type='str')
         ),
-        supports_check_mode=False
+        supports_check_mode=True
     )
 
     if module.params['names'] is None and module.params['name'] is None:
@@ -70,7 +70,10 @@ def main():
     else:
         names = [module.params['name']]
 
-    args = [module.params['monasca_setup_path'], '-d']
+    if module.check_mode:
+        args = [module.params['monasca_setup_path'], '--dry_run', '-d']
+    else:
+        args = [module.params['monasca_setup_path'], '-d']
     args.extend(names)
     if module.params['args'] is not None:
         args.extend(['-a', module.params['args']])
