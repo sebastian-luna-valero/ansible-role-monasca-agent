@@ -11,6 +11,7 @@ virtualenv must be installed on the system.
 - monasca_agent_project:
 
 ## Optional
+- monasca_agent_check_frequency - Sets how often the collection run for the agent will occur
 - monasca_agent_system_only - setting to true will cause Monasca setup to run in system_only mode
 - monasca_agent_service:
 - monasca_agent_dimensions: 'role:monitoring,region:a'
