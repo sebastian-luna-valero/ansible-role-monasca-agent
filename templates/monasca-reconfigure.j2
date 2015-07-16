@@ -7,7 +7,7 @@
     --project_name '{{monasca_agent_project}}' \
     {% if monasca_api_url is defined %} --monasca_url '{{monasca_api_url}}' {% endif %} \
     {% if monasca_agent_dimensions is defined %} --dimensions '{{monasca_agent_dimensions}}' {% endif %} \
-    --check_frequency '{{monasca_agent_check_frequency}}' \
+    {% if monasca_agent_check_frequency is defined %} --check_frequency '{{monasca_agent_check_frequency}}' {% endif %} \
     {% if monasca_agent_system_only %} --system_only {% endif %} \
     {% if monasca_log_level is defined %} --log_level '{{monasca_log_level}}' {% endif %} \
     --overwrite
