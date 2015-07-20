@@ -26,9 +26,10 @@ options:
     state:
         required: false
         default: "configured"
-        choices: [ configured ]
+        choices: [ configured, absent ]
         description:
-            - If the state is configured the detection plugin will be run causing updates if needed.
+            - If the state is configured the detection plugin will be run causing updates if needed. If absent the configuration created by the
+              detection_plugins will be removed.
     monasca_setup_path:
         required: false
         default: "/opt/monasca/bin/monasca-setup"
@@ -56,7 +57,7 @@ def main():
             args=dict(required=False, type='str'),
             name=dict(required=False, type='str'),
             names=dict(required=False, type='list'),
-            state=dict(default='configured', choices=['configured'], type='str'),
+            state=dict(default='configured', choices=['configured', 'absent'], type='str'),
             monasca_setup_path=dict(default='/opt/monasca/bin/monasca-setup', type='str')
         ),
         supports_check_mode=True
@@ -70,10 +71,12 @@ def main():
     else:
         names = [module.params['name']]
 
+    args = [module.params['monasca_setup_path']]
     if module.check_mode:
-        args = [module.params['monasca_setup_path'], '--dry_run', '-d']
-    else:
-        args = [module.params['monasca_setup_path'], '-d']
+        args.append('--dry_run')
+    if module.params['state'] == 'absent':
+        args.append('-r')
+    args.append('-d')
     args.extend(names)
     if module.params['args'] is not None:
         args.extend(['-a', module.params['args']])
