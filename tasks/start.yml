@@ -1,3 +1,7 @@
 ---
-- name: Start and Enable Monasca-Agent
+- name: monasca-agent | restart | restart monasca-agent service
+  service: name=monasca-agent state=restarted enabled=yes
+  when: monasca_agent_restart_required
+
+- name: monasca-agent | start | start monasca-agent service
   service: name=monasca-agent state=started enabled=yes

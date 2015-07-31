@@ -1,2 +1,7 @@
+---
 - name: run monasca-setup
   command: "{{agent_reconfigure_script}}"
+
+- name: monasca_agent_config_change
+  set_fact:
+    monasca_agent_restart_required: true

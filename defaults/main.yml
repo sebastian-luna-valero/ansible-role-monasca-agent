@@ -7,3 +7,6 @@ skip_install: False
 monasca_virtualenv_dir: /opt/monasca
 pip_conf_dir: ~/.pip
 run_mode: Deploy
+
+# flag to track restart requirement during reconfigure
+monasca_agent_restart_required: false
