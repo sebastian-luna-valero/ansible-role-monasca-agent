@@ -1,4 +1,6 @@
 ---
+# ©Copyright 2015 Hewlett-Packard Development Company, L.P.
+
 - include: pip_index.yml
 
 - name: Install deps to avoid pip doing compilation or enable it
