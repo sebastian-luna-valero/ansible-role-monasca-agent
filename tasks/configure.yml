@@ -1,4 +1,6 @@
 ---
+# ©Copyright 2015 Hewlett-Packard Development Company, L.P.
+
 - name: create conf.d dir and custom plugin dirs
   file: path="{{item}}" state=directory owner=root group=root mode=755
   with_items:

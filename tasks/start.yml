@@ -1,3 +1,5 @@
 ---
+# ©Copyright 2015 Hewlett-Packard Development Company, L.P.
+
 - name: Start and Enable Monasca-Agent
   service: name=monasca-agent state=started enabled=yes
