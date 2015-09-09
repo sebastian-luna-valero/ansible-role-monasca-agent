@@ -7,6 +7,9 @@
   apt: name={{item}} state=present
   with_items: dependencies
 
+- name: Upgrade pip in virtualenv
+  pip: name=pip state=latest virtualenv="{{monasca_virtualenv_dir}}"
+
 - name: pip install latest monasca-agent in a virtualenv
   pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}"
   notify: run monasca-setup
