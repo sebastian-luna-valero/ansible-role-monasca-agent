@@ -1,11 +1,17 @@
 ---
-# ©Copyright 2015 Hewlett-Packard Development Company, L.P.
+# ©Copyright 2015-2016 Hewlett Packard Enterprise Development Company, LP
 
 - include: pip_index.yml
 
 - name: Install deps to avoid pip doing compilation or enable it
   apt: name={{item}} state=present
-  with_items: dependencies
+  with_items: dependencies_deb
+  when: ansible_os_family == 'Debian'
+  
+- name: Install rpms to avoid pip doing compilation or enable it
+  yum: name={{item}} state=present
+  with_items: dependencies_rpm
+  when: ansible_os_family == 'RedHat'
 
 - name: Upgrade pip in virtualenv
   pip: name=pip version=7.1.2 virtualenv="{{monasca_virtualenv_dir}}"
