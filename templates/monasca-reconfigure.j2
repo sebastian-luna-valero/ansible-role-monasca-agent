@@ -10,4 +10,11 @@
     {% if monasca_agent_check_frequency is defined %} --check_frequency '{{monasca_agent_check_frequency}}' {% endif %} \
     {% if monasca_agent_system_only %} --system_only {% endif %} \
     {% if monasca_log_level is defined %} --log_level '{{monasca_log_level}}' {% endif %} \
+    {% if monasca_endpoint_type is defined %} --endpoint_type '{{monasca_endpoint_type}}' {% endif %} \
+    {% if monasca_project_domain_name is defined %} --project_domain_name '{{monasca_project_domain_name}}' {% endif %} \
+    {% if monasca_project_domain_id is defined %} --project_domain_id '{{monasca_project_domain_id}}' {% endif %} \
+    {% if monasca_region_name is defined %} --region_name '{{monasca_region_name}}' {% endif %} \
+    {% if monasca_service_type is defined %} --service_type '{{monasca_service_type}}' {% endif %} \
+    {% if monasca_user_domain_name is defined %} --user_domain_name '{{monasca_user_domain_name}}' {% endif %} \
+    {% if monasca_user_domain_id is defined %} --user_domain_id '{{monasca_user_domain_id}}' {% endif %} \
     --overwrite

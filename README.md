@@ -18,6 +18,14 @@ virtualenv must be installed on the system.
 - monasca_api_url: if undefined it will be pulled from the keystone service catalog.
 - monasca_agent_version: Defines a specific version to install, defaults to latest
 - monasca_log_level: Log level of the agent logs, default is WARN
+- monasca_endpoint_type: Keystone endpoint type for monitoring service, eg: public, internal etc.
+- monasca_project_domain_name: Keystone project domain name for Monasca
+- monasca_project_domain_id: Keystone project domain ID for Monasca
+- monasca_region_name: Keystone API URL region name for Monasca
+- monasca_service_type: Keystone API URL service type for Monasca
+- monasca_user_domain_name: Keystone project domain name for Monasca
+- monasca_user_domain_id: Keystone project domain ID for Monasca
+
 - pip_index_url: Index URL to use instead of the default for installing pip packages
 - run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start. 'Use' can be set if the only desire is to use the monasca_agent_plugin module
 
