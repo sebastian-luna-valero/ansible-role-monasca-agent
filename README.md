@@ -1,3 +1,8 @@
+***
+This is a fork of [hpcloud-mon/ansible-monasca-agent](https://github.com/hpcloud-mon/ansible-monasca-agent) which
+is no longer being updated.
+***
+
 #monasca-agent
 Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part of the [Monasca](https://wiki.openstack.org/wiki/Monasca) project.
 It is installs it into a virtualenv on the box.
