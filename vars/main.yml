@@ -7,9 +7,15 @@ dependencies_deb:
   - build-essential
   - libxml2-dev
   - libxslt1-dev
-dependencies_rpm:
+dependencies_redhat:
   - python-devel
   - PyYAML
+  - libxml2-devel
+  - libxslt-devel
+  - gcc
+dependencies_suse:
+  - python-devel
+  - python-PyYAML
   - libxml2-devel
   - libxslt-devel
   - gcc

@@ -10,8 +10,13 @@
 
 - name: Install rpms to avoid pip doing compilation or enable it
   yum: name={{item}} state=present
-  with_items: "{{ dependencies_rpm }}"
+  with_items: "{{ dependencies_redhat }}"
   when: ansible_os_family == 'RedHat'
+
+- name: Install rpms to avoid pip doing compilation or enable it
+  zypper: name={{item}} state=present
+  with_items: "{{ dependencies_suse }}"
+  when: ansible_os_family == 'Suse'
 
 - name: Upgrade pip in virtualenv
   pip: name=pip version=7.1.2 virtualenv="{{monasca_virtualenv_dir}}"
