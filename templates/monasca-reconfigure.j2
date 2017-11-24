@@ -1,5 +1,6 @@
 #!/bin/sh
 '{{monasca_virtualenv_dir}}/bin/monasca-setup' \
+    {% if monasca_user is defined %} --user '{{monasca_user}}' {% endif %} \
     -u '{{monasca_agent_user}}' \
     -p '{{monasca_agent_password}}' \
     {% if monasca_agent_service is defined %} -s '{{monasca_agent_service}}' {% endif %} \

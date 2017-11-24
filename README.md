@@ -30,6 +30,7 @@ virtualenv must be installed on the system.
 - monasca_service_type: Keystone API URL service type for Monasca
 - monasca_user_domain_name: Keystone project domain name for Monasca
 - monasca_user_domain_id: Keystone project domain ID for Monasca
+- monasca_user: User which runs the Monasca Agent. Defaults to 'mon-agent'.
 
 - pip_index_url: Index URL to use instead of the default for installing pip packages
 - run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start. 'Use' can be set if the only desire is to use the monasca_agent_plugin module
