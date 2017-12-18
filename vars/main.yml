@@ -3,18 +3,21 @@
 
 dependencies_deb:
   - python-dev
+  - python-virtualenv
   - python-yaml
   - build-essential
   - libxml2-dev
   - libxslt1-dev
 dependencies_redhat:
   - python-devel
+  - python-virtualenv
   - PyYAML
   - libxml2-devel
   - libxslt-devel
   - gcc
 dependencies_suse:
   - python-devel
+  - python-virtualenv
   - python-PyYAML
   - libxml2-devel
   - libxslt-devel
