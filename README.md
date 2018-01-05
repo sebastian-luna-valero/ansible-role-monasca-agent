@@ -31,6 +31,7 @@ virtualenv must be installed on the system.
 - monasca_user_domain_name: Keystone project domain name for Monasca
 - monasca_user_domain_id: Keystone project domain ID for Monasca
 - monasca_user: User which runs the Monasca Agent. Defaults to 'mon-agent'.
+- monasca_agent_custom_plugin_repos: A list of git repos containing custom plugins. See below.
 
 - pip_index_url: Index URL to use instead of the default for installing pip packages
 - run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start. 'Use' can be set if the only desire is to use the monasca_agent_plugin module
@@ -71,7 +72,8 @@ You must have the monasca-agent role in your playbook. If the agent is already d
   roles:
     - {role: monasca-agent, run_mode: Use}
 
-To copy custom detection and/or check plugins to the machine before running the monasca_agent_plugin module, use the
+To copy custom detection and/or check plugins to the machine before running the
+monasca_agent_plugin module there are two options. The first is to use the
 [copy module](http://docs.ansible.com/copy_module.html) with the published variables `monasca_agent_check_plugin_dir` or `monasca_agent_detection_plugin_dir`
 for example:
 
@@ -81,6 +83,15 @@ for example:
       copy: src=files/detection/example.py dest="{{monasca_agent_detection_plugin_dir}}"
     - name: Run Monasca agent example plugin configuration
       monasca_agent_plugin: name="example"
+
+The second is to specify a list of git repos containing pip installable
+plugins as a role variable, for example:
+
+    monasca_agent_custom_plugin_repos:
+        - "https://github.com/stackhpc/stackhpc-monasca-agent-plugins.git@some_branch"
+
+It is assumed that pip will install the plugins to the correct check and detection
+plugin directories as mentioned above.
 
 ##License
 Apache
