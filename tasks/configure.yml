@@ -13,6 +13,12 @@
   with_dict: "{{ monasca_checks }}"
   notify: run monasca-setup
 
+- name: Install custom plugins
+  pip:
+    name: "git+{{ item }}"
+    editable: False
+  with_items: "{{ monasca_agent_custom_plugin_repos }}"
+
 # Instead of running this directly by creating a file to run it changes such as user/pass will trigger a rerun. Also a user can run it manually
 - name: Create reconfigure script
   template: dest="{{agent_reconfigure_script}}" src=monasca-reconfigure.j2 owner=root group=root mode=750
