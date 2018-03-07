@@ -22,6 +22,7 @@ virtualenv must be installed on the system.
 - monasca_agent_dimensions: 'role:monitoring,region:a'
 - monasca_api_url: if undefined it will be pulled from the keystone service catalog.
 - monasca_agent_version: Defines a specific version to install, defaults to latest
+- monasca_agent_branch: Defines a specific branch to install. Ignored if monasca_agent_version is set.
 - monasca_log_level: Log level of the agent logs, default is WARN
 - monasca_endpoint_type: Keystone endpoint type for monitoring service, eg: public, internal etc.
 - monasca_project_domain_name: Keystone project domain name for Monasca
