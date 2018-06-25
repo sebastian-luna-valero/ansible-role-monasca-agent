@@ -19,10 +19,10 @@
   when: ansible_os_family == 'Suse'
 
 - name: Upgrade pip in virtualenv
-  pip: name=pip version=7.1.2 virtualenv="{{monasca_virtualenv_dir}}"
+  pip: name=pip state=latest virtualenv="{{monasca_virtualenv_dir}}"
 
 - name: Upgrade setuptools in virtualenv
-  pip: name=setuptools version=1.4 virtualenv="{{monasca_virtualenv_dir}}"
+  pip: name=setuptools state=latest virtualenv="{{monasca_virtualenv_dir}}"
 
 - name: pip install latest monasca-agent in a virtualenv
   pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}"
