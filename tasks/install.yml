@@ -36,7 +36,7 @@
 
 - name: pip install a specific branch of monasca-agent in a virtualenv
   pip:
-    name: "git+https://git.openstack.org/openstack/monasca-agent@{{ monasca_agent_branch }}"
+    name: "git+{{ monasca_agent_git_repo }}@{{ monasca_agent_branch }}"
     virtualenv: "{{ monasca_virtualenv_dir }}"
     editable: False
   when: monasca_agent_branch is defined and monasca_agent_version is not defined
