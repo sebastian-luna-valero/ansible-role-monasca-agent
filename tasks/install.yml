@@ -39,6 +39,7 @@
     name: "git+{{ monasca_agent_git_repo }}@{{ monasca_agent_branch }}"
     virtualenv: "{{ monasca_virtualenv_dir }}"
     editable: False
+    extra_args: "{{ monasca_pip_extra_args }}"
   when: monasca_agent_branch is defined and monasca_agent_version is not defined
 
 - name: pip install psutil==3.0.1
