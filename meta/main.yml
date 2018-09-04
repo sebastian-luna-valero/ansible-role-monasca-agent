@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: monasca-agent
+  #role_name: monasca_agent
   author: Tim Kuhlman
   description: Installs the monasca-agent part of the Monasca project.
   company: HP
