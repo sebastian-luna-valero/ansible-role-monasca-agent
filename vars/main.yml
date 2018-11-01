@@ -9,6 +9,8 @@ dependencies_deb:
   - build-essential
   - libxml2-dev
   - libxslt1-dev
+  - libffi-dev
+  - libssl-dev
 dependencies_redhat:
   - python-devel
   - python-pip
@@ -16,6 +18,8 @@ dependencies_redhat:
   - PyYAML
   - libxml2-devel
   - libxslt-devel
+  - libffi-devel
+  - openssl-devel
   - gcc
 dependencies_suse:
   - python-devel
@@ -24,6 +28,8 @@ dependencies_suse:
   - python-PyYAML
   - libxml2-devel
   - libxslt-devel
+  - libffi-devel
+  - openssl-devel
   - gcc
 monasca_conf_dir: /etc/monasca
 monasca_agent_check_plugin_dir: /usr/lib/monasca/agent/custom_checks.d/
