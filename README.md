@@ -33,6 +33,9 @@ virtualenv must be installed on the system.
 - monasca_user_domain_id: Keystone project domain ID for Monasca
 - monasca_user: User which runs the Monasca Agent. Defaults to 'mon-agent'.
 - monasca_agent_custom_plugin_repos: A list of git repos containing custom plugins. See below.
+- monasca_skip_detection_plugins: List of plugins to skip automatic detection
+  of. For example, if you configure custom NTP configuration, you can add the
+  NTP plugin here to prevent the custom config getting overwritten.
 
 - pip_index_url: Index URL to use instead of the default for installing pip packages
 - run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start. 'Use' can be set if the only desire is to use the monasca_agent_plugin module
