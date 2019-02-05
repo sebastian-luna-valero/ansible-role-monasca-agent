@@ -1,12 +1,11 @@
 ---
 # ©Copyright 2015 Hewlett-Packard Development Company, L.P.
 
-- name: create conf.d dir and custom plugin dirs
+- name: create conf.d dir and custom plugin dir
   file: path="{{item}}" state=directory owner=root group=root mode=755
   with_items:
     - "{{monasca_conf_dir}}/agent/conf.d"
-    - "{{monasca_agent_check_plugin_dir}}"
-    - "{{monasca_agent_detection_plugin_dir}}"
+    - "/usr/lib/monasca/agent"
 
 - name: Create additional plugins config
   template: dest="{{monasca_conf_dir}}/agent/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
@@ -19,6 +18,15 @@
     editable: False
     virtualenv: "{{ monasca_virtualenv_dir }}"
   with_items: "{{ monasca_agent_custom_plugin_repos }}"
+
+- name: Link custom plugins from Monasca venv to hard coded folder searched by Monasca Agent
+  file:
+    src: "{{ monasca_virtualenv_dir }}/lib/python2.7/site-packages/{{ item | regex_replace('\\/$', '') }}"
+    dest: "{{ item | regex_replace('\\/$', '') }}"
+    state: link
+  with_items:
+    - "{{ monasca_agent_check_plugin_dir }}"
+    - "{{ monasca_agent_detection_plugin_dir }}"
 
 # Instead of running this directly by creating a file to run it changes such as user/pass will trigger a rerun. Also a user can run it manually
 - name: Create reconfigure script
