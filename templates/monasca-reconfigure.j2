@@ -19,4 +19,5 @@
     {% if monasca_user_domain_name is defined %} --user_domain_name '{{monasca_user_domain_name}}' {% endif %} \
     {% if monasca_user_domain_id is defined %} --user_domain_id '{{monasca_user_domain_id}}' {% endif %} \
     {% if monasca_skip_detection_plugins is defined %} --skip_detection_plugins '{{monasca_skip_detection_plugins}}' {% endif %} \
+    {% if monasca_agent_statsd_aggregation_interval is defined %} --monasca_statsd_interval '{{monasca_agent_statsd_aggregation_interval}}' {% endif %} \
     --overwrite
