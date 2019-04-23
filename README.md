@@ -54,10 +54,9 @@ An example ssh check:
           ssh_timeout: 0.5
           ping_timeout: 1
         instances:
-          - devstack:
-              name: devstack
-              host_name: 192.168.10.5
-              alive_test: ssh
+          - name: devstack
+            host_name: 192.168.10.5
+            alive_test: ssh
 
 ## monasca_agent_plugin module
 This role contains the module monasca_agent_plugin which can be used to run monasca-setup for specific detection plugins. This is particularly
