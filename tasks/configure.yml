@@ -19,6 +19,14 @@
     virtualenv: "{{ monasca_virtualenv_dir }}"
   with_items: "{{ monasca_agent_custom_plugin_repos }}"
 
+- name: Delete previous directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ monasca_agent_check_plugin_dir }}"
+    - "{{ monasca_agent_detection_plugin_dir }}"
+
 - name: Link custom plugins from Monasca venv to hard coded folder searched by Monasca Agent
   file:
     src: "{{ monasca_virtualenv_dir }}/lib/python2.7/site-packages/{{ item | regex_replace('\\/$', '') }}"
@@ -36,4 +44,4 @@
 - meta: flush_handlers
 
 - name: Enable Monasca-Agent
-  service: name=monasca-agent.target state=started enabled=yes
+  service: name="{{ monasca_agent_service }}" state=started enabled=yes

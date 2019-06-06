@@ -2,4 +2,4 @@
 # ©Copyright 2015 Hewlett-Packard Development Company, L.P.
 
 - name: Stop Monasca-Agent
-  service: name=monasca-agent.target state=stopped
+  service: name="{{ monasca_agent_service }}" state=stopped

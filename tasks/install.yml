@@ -34,6 +34,21 @@
   notify: run monasca-setup
   when: monasca_agent_version is defined
 
+- name: "check if {{ monasca_agent_target }} file exists"
+  stat:
+    path: /etc/systemd/system/{{ monasca_agent_target }}
+  register: target_file
+
+- name: "when a {{ monasca_agent_target }} file exists"
+  block:
+    - name: "disable {{ monasca_agent_service }} file if it exists"
+      service: name="{{ monasca_agent_service }}" state=stopped enabled=no
+      ignore_errors: yes
+    - name: "use {{ monasca_agent_target }} as the service"
+      set_fact:
+        monasca_agent_service: "{{ monasca_agent_target }}"
+  when: target_file.stat.exists
+
 - name: pip install a specific branch of monasca-agent in a virtualenv
   pip:
     name: "git+{{ monasca_agent_git_repo }}@{{ monasca_agent_branch }}"
