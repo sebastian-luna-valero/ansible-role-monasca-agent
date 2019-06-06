@@ -46,12 +46,22 @@
     path: /etc/systemd/system/{{ monasca_agent_systemd_unit_filename }}
   register: target_file
 
-- name: "disable {{ monasca_agent_legacy_systemd_unit_filename }} file if it exists"
+- name: Populate service facts
+  service_facts:
+
+- name: "Disable {{ monasca_agent_legacy_systemd_unit_filename }} service if it exists"
   service: name="{{ monasca_agent_legacy_systemd_unit_filename }}" state=stopped enabled=no
-  ignore_errors: yes
+  when:
+    - target_file.stat.exists
+    - monasca_agent_legacy_systemd_unit_filename in services
+
+- name: "Delete {{ monasca_agent_legacy_systemd_unit_filename }} unit file if it exists"
+  file:
+    path: /etc/systemd/system/{{ monasca_agent_legacy_systemd_unit_filename }}
+    state: absent
   when: target_file.stat.exists
 
-- name: "use {{ monasca_agent_systemd_unit_filename }} as the service"
+- name: "Use {{ monasca_agent_systemd_unit_filename }} as the service"
   set_fact:
     monasca_agent_systemd_unit_filename: "{{ monasca_agent_legacy_systemd_unit_filename }}"
   when: not target_file.stat.exists
