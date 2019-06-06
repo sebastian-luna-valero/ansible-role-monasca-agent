@@ -36,4 +36,4 @@
 - meta: flush_handlers
 
 - name: Enable Monasca-Agent
-  service: name=monasca-agent state=started enabled=yes
+  service: name=monasca-agent.target state=started enabled=yes
