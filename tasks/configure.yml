@@ -19,13 +19,23 @@
     virtualenv: "{{ monasca_virtualenv_dir }}"
   with_items: "{{ monasca_agent_custom_plugin_repos }}"
 
-- name: Delete previous directories
-  file:
+- name: Check if the previous paths are directories
+  stat:
     path: "{{ item }}"
-    state: absent
   with_items:
     - "{{ monasca_agent_check_plugin_dir }}"
     - "{{ monasca_agent_detection_plugin_dir }}"
+  register: prev_paths
+
+- name: Delete previous paths if they are directories
+  file:
+    path: "{{ item.item }}"
+    state: absent
+  when:
+    - item.stat.exists
+    - item.stat.isdir == true
+    - item.stat.islnk == false
+  with_items: "{{ prev_paths.results }}"
 
 - name: Link custom plugins from Monasca venv to hard coded folder searched by Monasca Agent
   file:
@@ -44,4 +54,4 @@
 - meta: flush_handlers
 
 - name: Enable Monasca-Agent
-  service: name="{{ monasca_agent_service }}" state=started enabled=yes
+  service: name="{{ monasca_agent_systemd_unit_filename }}" state=started enabled=yes
