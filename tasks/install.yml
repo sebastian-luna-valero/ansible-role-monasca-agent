@@ -41,6 +41,31 @@
     editable: False
   when: monasca_agent_branch is defined and monasca_agent_version is not defined
 
+- name: "check if {{ monasca_agent_systemd_unit_filename }} file exists"
+  stat:
+    path: /etc/systemd/system/{{ monasca_agent_systemd_unit_filename }}
+  register: target_file
+
+- name: Populate service facts
+  service_facts:
+
+- name: "Disable {{ monasca_agent_legacy_systemd_unit_filename }} service if it exists"
+  service: name="{{ monasca_agent_legacy_systemd_unit_filename }}" state=stopped enabled=no
+  when:
+    - target_file.stat.exists
+    - monasca_agent_legacy_systemd_unit_filename in services
+
+- name: "Delete {{ monasca_agent_legacy_systemd_unit_filename }} unit file if it exists"
+  file:
+    path: /etc/systemd/system/{{ monasca_agent_legacy_systemd_unit_filename }}
+    state: absent
+  when: target_file.stat.exists
+
+- name: "Use {{ monasca_agent_systemd_unit_filename }} as the service"
+  set_fact:
+    monasca_agent_systemd_unit_filename: "{{ monasca_agent_legacy_systemd_unit_filename }}"
+  when: not target_file.stat.exists
+
 - name: pip install psutil==3.0.1
   pip: name=psutil version=3.0.1 virtualenv="{{monasca_virtualenv_dir}}"
   notify: run monasca-setup
