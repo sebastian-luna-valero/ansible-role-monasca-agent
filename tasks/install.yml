@@ -61,7 +61,7 @@
     state: absent
   when: target_file.stat.exists
 
-- name: "Use {{ monasca_agent_systemd_unit_filename }} as the service"
+- name: "Use {{ monasca_agent_legacy_systemd_unit_filename }} instead of {{ monasca_agent_systemd_unit_filename }} as the service"
   set_fact:
     monasca_agent_systemd_unit_filename: "{{ monasca_agent_legacy_systemd_unit_filename }}"
   when: not target_file.stat.exists
