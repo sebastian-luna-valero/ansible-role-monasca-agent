@@ -65,7 +65,3 @@
   set_fact:
     monasca_agent_systemd_unit_filename: "{{ monasca_agent_legacy_systemd_unit_filename }}"
   when: not target_file.stat.exists
-
-- name: pip install psutil==3.0.1
-  pip: name=psutil version=3.0.1 virtualenv="{{monasca_virtualenv_dir}}"
-  notify: run monasca-setup
