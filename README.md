@@ -25,6 +25,7 @@ virtualenv must be installed on the system.
 - monasca_agent_branch: Defines a specific branch to install. Ignored if monasca_agent_version is set.
 - monasca_log_level: Log level of the agent logs, default is WARN
 - monasca_endpoint_type: Keystone endpoint type for monitoring service, eg: public, internal etc.
+- monasca_pip_extra_args: Additional args to pass to pip, such as upper constraints.
 - monasca_project_domain_name: Keystone project domain name for Monasca
 - monasca_project_domain_id: Keystone project domain ID for Monasca
 - monasca_region_name: Keystone API URL region name for Monasca

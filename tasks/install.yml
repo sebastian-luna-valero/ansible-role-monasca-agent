@@ -25,12 +25,12 @@
   pip: name=setuptools state=latest virtualenv="{{monasca_virtualenv_dir}}"
 
 - name: pip install latest monasca-agent in a virtualenv
-  pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}"
+  pip: name=monasca-agent state=latest virtualenv="{{monasca_virtualenv_dir}}" extra_args="{{monasca_pip_extra_args | default(omit)}}"
   notify: run monasca-setup
   when: monasca_agent_version is not defined and monasca_agent_branch is not defined
 
 - name: pip install a specific version of monasca-agent in a virtualenv
-  pip: name=monasca-agent state=present version="{{monasca_agent_version}}" virtualenv="{{monasca_virtualenv_dir}}"
+  pip: name=monasca-agent state=present version="{{monasca_agent_version}}" virtualenv="{{monasca_virtualenv_dir}}" extra_args="{{monasca_pip_extra_args | default(omit)}}"
   notify: run monasca-setup
   when: monasca_agent_version is defined
 
@@ -39,7 +39,7 @@
     name: "git+{{ monasca_agent_git_repo }}@{{ monasca_agent_branch }}"
     virtualenv: "{{ monasca_virtualenv_dir }}"
     editable: False
-    extra_args: "{{ monasca_pip_extra_args }}"
+    extra_args: "{{ monasca_pip_extra_args | default(omit) }}"
   when: monasca_agent_branch is defined and monasca_agent_version is not defined
 
 - name: pip install psutil==3.0.1
