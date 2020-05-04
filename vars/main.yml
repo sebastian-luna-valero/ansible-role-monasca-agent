@@ -13,14 +13,8 @@ dependencies_deb:
   - libssl-dev
   - lshw
 dependencies_redhat:
-  - python-devel
-  - python-pip
-  - python-virtualenv
-  - PyYAML
-  - libxml2-devel
-  - libxslt-devel
-  - libffi-devel
-  - openssl-devel
+  - python3-pip
+  - python3-virtualenv
   - gcc
   - lshw
 dependencies_suse:

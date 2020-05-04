@@ -39,7 +39,7 @@
 
 - name: Link custom plugins from Monasca venv to hard coded folder searched by Monasca Agent
   file:
-    src: "{{ monasca_virtualenv_dir }}/lib/python2.7/site-packages/{{ item | regex_replace('\\/$', '') }}"
+    src: "{{ monasca_virtualenv_dir }}/lib/python3.6/site-packages/{{ item | regex_replace('\\/$', '') }}"
     dest: "{{ item | regex_replace('\\/$', '') }}"
     state: link
   with_items:
