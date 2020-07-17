@@ -83,9 +83,9 @@ monasca_agent_plugin module there are two options. The first is to use the
 for example:
 
     - name: Copy example check plugin
-      copy: src=files/check/example.py dest="{{monasca_agent_check_plugin_dir}}"
+      copy: src=files/check/example.py dest="{{ monasca_agent_check_plugin_dir }}"
     - name: Copy example detection plugin
-      copy: src=files/detection/example.py dest="{{monasca_agent_detection_plugin_dir}}"
+      copy: src=files/detection/example.py dest="{{ monasca_agent_detection_plugin_dir }}"
     - name: Run Monasca agent example plugin configuration
       monasca_agent_plugin: name="example"
 

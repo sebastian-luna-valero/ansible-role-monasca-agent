@@ -2,13 +2,13 @@
 # ©Copyright 2015 Hewlett-Packard Development Company, L.P.
 
 - name: create conf.d dir and custom plugin dir
-  file: path="{{item}}" state=directory owner=root group=root mode=755
+  file: path="{{ item }}" state=directory owner=root group=root mode=755
   with_items:
-    - "{{monasca_conf_dir}}/agent/conf.d"
+    - "{{ monasca_conf_dir }}/agent/conf.d"
     - "/usr/lib/monasca/agent"
 
 - name: Create additional plugins config
-  template: dest="{{monasca_conf_dir}}/agent/conf.d/{{item.key}}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
+  template: dest="{{ monasca_conf_dir }}/agent/conf.d/{{ item.key }}.yaml" src=plugin.yaml.j2 owner=root group=root mode=644
   with_dict: "{{ monasca_checks }}"
   notify: run monasca-setup
 
@@ -33,8 +33,8 @@
     state: absent
   when:
     - item.stat.exists
-    - item.stat.isdir == true
-    - item.stat.islnk == false
+    - item.stat.isdir
+    - not item.stat.islnk
   with_items: "{{ prev_paths.results }}"
 
 - name: Link custom plugins from Monasca venv to hard coded folder searched by Monasca Agent
@@ -48,7 +48,7 @@
 
 # Instead of running this directly by creating a file to run it changes such as user/pass will trigger a rerun. Also a user can run it manually
 - name: Create reconfigure script
-  template: dest="{{agent_reconfigure_script}}" src=monasca-reconfigure.j2 owner=root group=root mode=750
+  template: dest="{{ agent_reconfigure_script }}" src=monasca-reconfigure.j2 owner=root group=root mode=750
   notify: run monasca-setup
 
 - meta: flush_handlers
