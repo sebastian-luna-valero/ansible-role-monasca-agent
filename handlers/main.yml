@@ -2,4 +2,4 @@
 # ©Copyright 2015 Hewlett-Packard Development Company, L.P.
 
 - name: run monasca-setup
-  command: "{{agent_reconfigure_script}}"
+  command: "{{ agent_reconfigure_script }}"
