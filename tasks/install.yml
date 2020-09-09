@@ -3,20 +3,20 @@
 
 - include: pip_index.yml
 
+- name: Set OS distribution dependent variables
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "deps_{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+        - "deps_{{ ansible_os_family }}.yml"
+        - "deps_default.yml"
+      paths:
+        - "vars"
+
 - name: Install deps to avoid pip doing compilation or enable it
-  apt: name={{ item }} state=present
-  with_items: "{{ dependencies_deb }}"
-  when: ansible_os_family == 'Debian'
-
-- name: Install rpms to avoid pip doing compilation or enable it
-  yum: name={{ item }} state=present
-  with_items: "{{ dependencies_redhat }}"
-  when: ansible_os_family == 'RedHat'
-
-- name: Install rpms to avoid pip doing compilation or enable it
-  zypper: name={{ item }} state=present
-  with_items: "{{ dependencies_suse }}"
-  when: ansible_os_family == 'Suse'
+  package:
+    name: "{{ monasca_os_dependencies }}"
 
 - name: Upgrade pip in virtualenv
   pip: name=pip state=latest virtualenv="{{ monasca_virtualenv_dir }}"
