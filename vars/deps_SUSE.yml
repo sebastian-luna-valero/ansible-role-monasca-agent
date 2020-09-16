@@ -14,4 +14,3 @@ monasca_os_dependencies:
   - gcc
   - lshw
 
-...
