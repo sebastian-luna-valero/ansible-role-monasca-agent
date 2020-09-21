@@ -37,9 +37,24 @@
     - not item.stat.islnk
   with_items: "{{ prev_paths.results }}"
 
+- name: Extract python interpreter version from virtualenv
+  command: "{{ monasca_virtualenv_dir }}/bin/python -c \"import sysconfig; print(sysconfig.get_config_var('py_version_short'))\""
+  register: py_version_short
+
+- set_fact:
+    venv_py_version: "{{ py_version_short.stdout_lines[0] }}"
+
+- name: Ensures Monasca Agent custom plugins directories exist
+  file:
+    path: "{{ monasca_virtualenv_dir }}/lib/python{{ venv_py_version }}/site-packages/{{ item | regex_replace('\\/$', '') }}"
+    state: directory
+  with_items:
+    - "{{ monasca_agent_check_plugin_dir }}"
+    - "{{ monasca_agent_detection_plugin_dir }}"
+
 - name: Link custom plugins from Monasca venv to hard coded folder searched by Monasca Agent
   file:
-    src: "{{ monasca_virtualenv_dir }}/lib/python2.7/site-packages/{{ item | regex_replace('\\/$', '') }}"
+    src: "{{ monasca_virtualenv_dir }}/lib/python{{ venv_py_version }}/site-packages/{{ item | regex_replace('\\/$', '') }}"
     dest: "{{ item | regex_replace('\\/$', '') }}"
     state: link
   with_items:
