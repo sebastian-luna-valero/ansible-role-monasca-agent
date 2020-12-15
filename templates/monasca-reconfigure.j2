@@ -1,8 +1,8 @@
 #!/bin/sh
 '{{ monasca_virtualenv_dir }}/bin/monasca-setup' \
     {% if monasca_user is defined %} --user '{{ monasca_user }}' {% endif %} \
-    -u '{{ monasca_agent_user }}' \
-    -p '{{ monasca_agent_password }}' \
+    {% if monasca_agent_user is defined %} -u '{{ monasca_agent_user }}' {% else  %} --application_credential_id '{{ monasca_application_credential_id }}' {% endif %} \
+    {% if monasca_agent_password is defined %} -p '{{ monasca_agent_password }}' {% else %} --application_credential_secret '{{ monasca_application_credential_secret }}' {% endif %} \
     {% if monasca_agent_service is defined %} -s '{{ monasca_agent_service }}' {% endif %} \
     --keystone_url '{{ keystone_url }}' \
     --project_name '{{ monasca_agent_project }}' \

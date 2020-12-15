@@ -3,7 +3,7 @@ This is a fork of [hpcloud-mon/ansible-monasca-agent](https://github.com/hpcloud
 is no longer being updated.
 ***
 
-#monasca-agent
+# monasca-agent
 Installs the [monasca-agent](https://github.com/stackforge/monasca-agent) part of the [Monasca](https://wiki.openstack.org/wiki/Monasca) project.
 It is installs it into a virtualenv on the box.
 
@@ -11,8 +11,8 @@ It is installs it into a virtualenv on the box.
 virtualenv must be installed on the system.
 
 - keystone_url:
-- monasca_agent_user:
-- monasca_agent_password:
+- monasca_agent_user or monasca_application_credential_id:
+- monasca_agent_password or monasca_application_credential_secret:
 - monasca_agent_project:
 
 ## Optional

@@ -2,13 +2,16 @@
 # ©Copyright 2015-2016 Hewlett Packard Enterprise Development Company, LP
 
 monasca_os_dependencies:
-  - python-devel
-  - python-pip
-  - python-virtualenv
-  - PyYAML
+  - python3-devel
+  - python3-pip
+  - python36-virtualenv
+  - python36-PyYAML
   - libxml2-devel
   - libxslt-devel
   - libffi-devel
   - openssl-devel
   - gcc
   - lshw
+
+virtualenv_command:
+  virtualenv-3

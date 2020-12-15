@@ -19,7 +19,7 @@
     name: "{{ monasca_os_dependencies }}"
 
 - name: Upgrade pip in virtualenv
-  pip: name=pip state=latest virtualenv="{{ monasca_virtualenv_dir }}"
+  pip: name=pip state=latest virtualenv="{{ monasca_virtualenv_dir }}" virtualenv_command="{{ virtualenv_command }}"
 
 - name: Upgrade setuptools in virtualenv
   pip: name=setuptools state=latest virtualenv="{{ monasca_virtualenv_dir }}"
