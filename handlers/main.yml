@@ -3,3 +3,6 @@
 
 - name: run monasca-setup
   command: "{{ agent_reconfigure_script }}"
+
+- name: restart monasca-agent
+  service: name="{{ monasca_agent_systemd_unit_filename }}" state=restarted enabled=yes
